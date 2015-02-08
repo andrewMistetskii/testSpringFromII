@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config />
+    <context:component-scan base-package="com.podobulge"/>
+    <bean id="duke"
+          class="com.podobulge.springidol.performers.Juggler">
+        <constructor-arg value="15"/>
+
+    </bean>
+
+    <bean id="poeticDuke"
+          class="com.podobulge.springidol.performers.PoeticJuggler">
+        <constructor-arg value="15"/>
+        <constructor-arg ref="sonnet29"/>
+    </bean>
+
+    <bean id="sonnet29"
+          class="com.podobulge.springidol.sonets.Sonnet29"/>
+
+    <!-- для создания бина класса-синглтона -->
+
+    <bean id="theStage"
+          class="com.podobulge.springidol.decarations.Stage"
+          factory-method="getInstance"/>
+
+    <!-- Кенни со своим личным саксофоном -->
+    <bean id="kenny"
+          class="com.podobulge.springidol.performers.Instrumentalist" scope="singleton">
+        <property name="song" value="Jingle Bells"/>
+        <property name="instrument">
+            <bean class="com.podobulge.springidol.instruments.Saxophone"/>
+        </property>
+    </bean>
+
+    <bean id="karl" class="com.podobulge.springidol.performers.Instrumentalist" scope="singleton">
+        <property name="song" value="Heavy metall Jingle Bells"/>
+        <property name="instrument">
+            <bean class="com.podobulge.springidol.instruments.Drumms"/>
+        </property>
+    </bean>
+
+
+
+    <bean id="testSpell"
+          class="com.podobulge.springidol.TestSpell">
+        <property name="name" value="#{'Chuck'}"/>
+        <property name="count" value="#{5}"/>
+        <property name="enabled" value="#{false}"/>
+    </bean>
+
+</beans>
